@@ -1,5 +1,5 @@
 from SemPhonTest.BatchProcessing import TrainingBatch, BatchEmbsExtractor
-from data.data_source import DatasetFactory
+from data.datasets.data_source import DatasetFactory
 from phon_utility.save_and_load import BatchConcatenator
 from phon_utility.save_and_load import PickleLoader
 from embeddings.embeddings_models import SemanticModelFactory

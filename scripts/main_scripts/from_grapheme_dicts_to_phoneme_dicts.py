@@ -10,18 +10,18 @@ def main():
     args = parser.parse_args()
 
     processes = []
-    from_dict_to_sentences = subprocess.Popen(['python', '/home/sperduti/phonetic_embeddings/scripts/from_dict_to_sentences.py',
+    from_dict_to_sentences = subprocess.Popen(['python', 'scripts/from_dict_to_sentences.py',
                                 '--dictionary_path', args.dictionary_path,
                                 '--plain_txt_dict_path', args.plain_txt_dict_path],
                                 stdout=subprocess.PIPE)
     processes.append(from_dict_to_sentences)
                                 
-    from_sentences_to_ipa = subprocess.Popen(['python', '/home/sperduti/phonetic_embeddings/scripts/extract_ipa.py',
+    from_sentences_to_ipa = subprocess.Popen(['python', 'scripts/extract_ipa.py',
                                                "--txt_clean_path", args.plain_txt_dict_path,
                                                "--transcription_path", args.transcriptions_path],)
     processes.append(from_sentences_to_ipa)
 
-    from_ipa_sentences_to_dict = subprocess.Popen(['python', '/home/sperduti/phonetic_embeddings/scripts/from_sentences_to_dict.py',
+    from_ipa_sentences_to_dict = subprocess.Popen(['python', 'scripts/from_sentences_to_dict.py',
                                          '--dictionary_path', args.dictionary_path,
                                          '--transcriptions_path', args.transcriptions_path,
                                          '--path_final_transcribed_dictionary', args.path_final_transcribed_dictionary])

@@ -1,7 +1,7 @@
-from scripts._exec.full_cosine_test import full_cosine_test
-from scripts._exec.full_embs_extraction import full_embs_extraction
-from scripts._exec.edit_distance import edit_distance
-from scripts._exec.extract_ipas import extract_ipas
+from scripts.main_scripts.run_cosine_test import full_cosine_test
+from scripts.main_scripts.run_embeddings_extraction import full_embs_extraction
+from scripts.main_scripts.calculate_edit_distance import edit_distance
+from scripts.main_scripts.extract_ipas import extract_ipas
 from phon_utility.full_pipeline_utils import (assign_correct_dataset_to_correct_embs, 
                                                 clean_file, 
                                                 articulatory_embs_format_correction,
@@ -13,6 +13,9 @@ from os import listdir
 from data.datasets.from_csv_to_txt_for_arpabet_transcript import from_csv_to_txt_for_arpabet_transcript
 import warnings
 import argparse
+
+# We cannot include the arpabet transcriber atm. You should add here your ARPA transcriber
+ARPABET_TRANSCRIBER_PATH = 'text_to_ARPABET/convert_arpabet.py'
 
 
 def main():
@@ -52,7 +55,7 @@ def main():
         for clean_dataset in args.clean_dataset_paths:
             txt_file_path = join(args.ARPA_path, clean_dataset.split('/')[-1].split('.csv')[0] + '.txt')
             from_csv_to_txt_for_arpabet_transcript(clean_dataset, txt_file_path)
-            subprocess.run(['python3', 'text_to_ARPABET/convert_arpabet.py', 
+            subprocess.run(['python3', ARPABET_TRANSCRIBER_PATH, 
                             '--file', txt_file_path])
             arpa_paths.append(txt_file_path.replace('.txt', 'ARPA.txt'))
         
